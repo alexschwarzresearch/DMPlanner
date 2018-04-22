@@ -1,0 +1,109 @@
+<div class="row mt-4 justify-content-center">
+	<div class="card col-10">
+		<div class="card-body">
+			<h2 class="card-title">{{ dmph.title }}</h2>
+			<p>A Data Management Plan created using DMPlanner.</p>
+			<h5>Creator</h5>
+			<p>
+				Name: {{ dmph.full_name }}<br>
+				ORCiD: <a href="https://orcid.org/{{ dmph.orcid }}">{{ dmph.orcid }}</a><br>
+
+				{% if dmph.email %}
+					Email: <a href="mailto:{{ dmph.email }}">{{ dmph.email }}</a><br>
+				{% endif %}
+
+				{% if dmph.current_education_name %}
+					Current Education: {{ dmph.current_education_name }}<br>
+				{% endif %}
+
+				{% if dmph.current_employment_name %}
+					Current Work: {{ dmph.current_employment_name }}<br>
+				{% endif %}
+			</p>
+
+			{% if dmph.resources['1'] %}
+				{% set len = dmph.resources['1']|length %}
+				<h5>What data will you collect or create?</h5>
+				<p>
+					{% if len > 1 %}
+						For the input data {{ inflect.number_to_words(len) }} resources were specified.
+						{% for resource in dmph.resources['1'] %}
+							The resource with the title "{{ resource.title }}", which is hosted on {{ resource.host }}.
+						{% endfor %}
+					{% else %}
+						{% for resource in dmph.resources['1'] %}
+							For the input data one resource was specified. The resource has the title "{{ resource.title }}" and is
+							hosted on {{ resource.host }}.
+						{% endfor %}
+					{% endif %}
+				</p>
+			{% endif %}
+
+			{% if dmph.resources['2'] or dmph.resources['4'] %}
+				<h5>How will you manage copyright and Intellectual Property Rights (IPR) issues?</h5>
+				<p>
+					{% if dmph.output_licenses %}
+						The output data which has been created as part of the project has the license restrictions
+						{% for license in dmph.output_licenses %}
+							{% if loop.index0 > 0 %} and {% endif %}
+							"{{ license }}"{% if loop.last %}.{% endif %}
+						{% endfor %}
+					{% endif %}
+
+					{% if dmph.software_licenses %}
+						The software which was created in the course of the project has the license restrictions
+						{% for license in dmph.software_licenses %}
+							{% if loop.index0 > 0 %} and {% endif %}
+							"{{ license }}"{% if loop.last %}.{% endif %}
+						{% endfor %}
+					{% endif %}
+				</p>
+			{% endif %}
+
+			{% if dmph.resources %}
+				<h5>Which data are of long-term value and should be retained, shared, and/or preserved?</h5>
+				<p>
+					In this project especially the
+					{% for type in dmph.resources %}{% if loop.index0 > 0 %}, {% if loop.last %}as well as the {% endif %}
+					{% endif %}{{ resource_type[type] }}{% endfor %}
+					has a long-term value and should at least be as long preserved as the targeted preservation time specifies.
+					{% for type in dmph.resources %} The targeted preservation time for the {{ resource_type[type] }} is
+						{{ dmph.times[type] }} years.{% endfor %}
+				</p>
+			{% endif %}
+
+			{% if dmph.resources %}
+				<h5>What is the long-term preservation plan for the dataset?</h5>
+				<p>
+					One of the main strategies of the long-term preservation plan is the use of public accessible repositories to save the components of the project.
+					{% for type in dmph.resources %}{% for res in dmph.resources[type] %} The {{ resource_type[type] }} resource "{{ res.title }}" is hosted on {{ res.host }}.{% endfor %}{% endfor %}
+				</p>
+			{% endif %}
+
+			{% if dmph.resources %}
+				<h5>How will you share the data?</h5>
+				<p>
+					The data will be primarily shared through the public repositories listed above.
+					This way the data is openly accessible and findable, as well as searchable.
+					The data is available at the repositories as of this moment.
+				</p>
+			{% endif %}
+
+			{% if dmph.resources %}
+				<h5>Are any restrictions on data sharing required?</h5>
+				<p>
+					The restrictions on data sharing are composed of the used licenses together with the long-term preservation plan.
+					With this in mind the following restrictions for the resources of the project apply.
+					{% for type in dmph.resources %}{% for res in dmph.resources[type] %} The {{ resource_type[type] }} resource "{{ res.title }}" will be hosted on {{ res.host }} for at least {{ dmph.times[type] }} years.{% endfor %}{% endfor %}
+				</p>
+			{% endif %}
+
+			<h5>Who will be responsible for data management?</h5>
+			<p>
+				The creator of this data management plan is {{dmph.full_name}}. Therefore {{dmph.full_name}} is also the reference person for possible reviews and revisions regarding this data management plan in the future.
+				Unless amended {{dmph.full_name}} is additionally responsible for the adherence to the plan.
+			</p>
+
+		</div>
+	</div>
+</div>

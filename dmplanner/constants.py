@@ -1,0 +1,23 @@
+resource_type = {
+    'input data': 1,
+    'output data': 2,
+    'intermediate data': 3,
+    'software': 4,
+    'presentation': 5,
+    'documentation': 6,
+    'miscellaneous data': 7,
+    1: 'input data',
+    2: 'output data',
+    3: 'intermediate data',
+    4: 'software',
+    5: 'presentation',
+    6: 'documentation',
+    7: 'miscellaneous data',
+    '1': 'input data',
+    '2': 'output data',
+    '3': 'intermediate data',
+    '4': 'software',
+    '5': 'presentation',
+    '6': 'documentation',
+    '7': 'miscellaneous data'
+}

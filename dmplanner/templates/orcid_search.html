@@ -1,0 +1,22 @@
+{% if records %}
+<p id="p_select_orcid">Please select your ORCiD record from the list below.</p>
+
+<table id="table_orcid_search" class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">ORCiD</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for record in records %}
+  <tr class="orcid_row" style="cursor: pointer" data-orcid="{{record.1}}">
+    <td>{{record.0}}</td>
+    <td>{{record.1}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<span>No matching ORCiD record was found.</span>
+{% endif %}

@@ -1,0 +1,10 @@
+<ul class="list-group">
+  {% for key, value in data.items() %}
+
+  {% if key != 'works' %}
+  <li class="list-group-item"><span class="badge badge-pill badge-secondary mr-1">{{key}}</span>{{value}}</li>
+  {% endif %}
+
+  {% endfor %}
+</ul>
+<div id="data_orcid" data-orcid="{{orcid}}" hidden></div>

@@ -1,0 +1,20 @@
+<div class="card mt-3 p-3" id="{{record.id}}" data-host="{{record.host}}">
+  <form class="form-inline">
+    <div class="form-group">
+      <span class="card-text h5"><span class="badge badge-secondary">{{record.host}}</span> {{record.name}}</span>
+    </div>
+    <div class="form-group mx-3">
+      <select class="form-control resource_type" onchange="resource_type_handler()">
+        <option hidden disabled selected value class="input-sm mx-5">-- select tag --</option>
+        <option value="1">input data</option>
+        <option value="2">output data</option>
+        <option value="3">intermediate data</option>
+        <option value="4">software</option>
+        <option value="5">presentation</option>
+        <option value="6">documentation</option>
+        <option value="7">miscellaneous data</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-outline-danger btn-sm ml-auto" onclick="remove_resource(this)">Remove</button>
+  </form>
+</div>
